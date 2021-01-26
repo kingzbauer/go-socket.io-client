@@ -298,6 +298,8 @@ func (d *decoder) DecodeData(v *packet) error {
 		d.Close()
 	}()
 	decoder := json.NewDecoder(d.current)
+	// Data comes as an array, prepare .Data appropriately
+	v.Data = make([]interface{})
 	if err := decoder.Decode(v.Data); err != nil {
 		return err
 	}
